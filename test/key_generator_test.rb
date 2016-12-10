@@ -21,8 +21,24 @@ class KeyGeneratorTest < Minitest::Test
     kg_2  = KeyGenerator.new
     key_1 = kg.key
     key_2 = kg_2.key
+
     assert_equal 5, kg.key.length
     refute key_1 == key_2 
+  end
+
+  def test_key_rotations
+    kg = KeyGenerator.new
+    kg.key
+    kg.set_hash_values
+    kg.to_integer
+    #binding.pry
+
+    assert_equal Fixnum, kg.key_rotation["A"].class
+    assert_equal 2, kg.key_rotation["A"].to_s.length
+    #assert_equal  @key[0..1].to_i, key_rotation["A"]
+    # assert_equal @key[1..2].to_i, rotation["B"]
+    # assert_equal @key[2..3].to_i, rotation["C"]
+    # assert_equal @key[3..4].to_i, rotation["D"]
   end
 
 
