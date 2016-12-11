@@ -23,7 +23,7 @@ class KeyGeneratorTest < Minitest::Test
     key_2 = kg_2.key
 
     assert_equal 5, kg.key.length
-    refute key_1 == key_2 
+    refute key_1 == key_2
   end
 
   def test_key_rotations
