@@ -13,7 +13,7 @@ attr_accessor :encryption_rotations
   end
 
   def hash_1
-    @key.set_hash_values
+    @key.to_integer
   end
 
   def hash_2
