@@ -1,7 +1,7 @@
 require 'pry'
 
 class KeyGenerator
-  attr_reader   :number_pool
+  attr_reader   :number_pool, :key
   attr_accessor :key_rotation
 
 
@@ -12,14 +12,18 @@ class KeyGenerator
   end
 
   def key
-    number_pool.sample(5).join
+    key = []
+    5.times do
+      key << number_pool.sample
+    end
+    key.join
   end
 
   def to_integer
     @key_rotation = @key_rotation.map do |key, value|
       [key, value.to_i]
     end.to_h
-    #binding.pry
+    # binding.pry
   end
 
   def set_hash_values
