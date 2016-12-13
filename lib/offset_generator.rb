@@ -1,4 +1,5 @@
 require 'Date'
+
 class OffsetGenerator
   attr_reader :date,
               :offset
@@ -26,7 +27,6 @@ class OffsetGenerator
     d = square_date[-1].to_i
     @offset_rotation = {"A" => a, "B" => b, "C" => c, "D" => d}
   end
-    #still need to grab the last 5 digits to make the hash
     #how to test that it's squaring?
     #can do a .length test once last numbers are pulled
 end

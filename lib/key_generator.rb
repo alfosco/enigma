@@ -14,21 +14,27 @@ class KeyGenerator
   def key
     key = []
     5.times do
-      key << number_pool.sample
+      key << number_pool.sample(1)
     end
     key.join
   end
 
-  def to_integer
-    @key_rotation = @key_rotation.map do |key, value|
-      [key, value.to_i]
-    end.to_h
-    # binding.pry
-  end
+  # def to_integer
+  #   key.set_hash_values
+  #   key_rotation = @key_rotation
+  #   key_rotation = @key_rotation.map do |key, value|
+  #     [key, value.to_i]
+  #   end.to_h
+  #   # binding.pry
+  # end
 
   def set_hash_values
     key = @key
-    @key_rotation = {"A" => key[0..1], "B" => key[1..2], "C" => key[2..3], "D" => key[3..4]}
+    a = key[0..1].to_i
+    b = key[1..2].to_i
+    c = key[2..3].to_i
+    d = key[3..4].to_i
+    @key_rotation = {"A" => a, "B" => b, "C" => c, "D"=> d }
   end
 
 end
