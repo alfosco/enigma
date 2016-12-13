@@ -18,12 +18,12 @@ class OffsetGeneratorTest < Minitest::Test
   end
   def test_date_format_is_DDMMYY
     offset = OffsetGenerator.new
-    assert_equal "2016-12-12", Date.today.strftime
-    assert_equal 121216, offset.format_date
+    assert_equal "2016-12-13", Date.today.strftime
+    assert_equal 131216, offset.format_date
   end
   def test_it_squares_date_and_returns_string
     offset = OffsetGenerator.new
-    assert_equal "14693318656", offset.square_date
+    assert_equal "17217638656", offset.square_date
     assert String, offset.square_date.class
   end
   def test_it_creates_hash_with_values_as_last_four_digits_of_squared_date

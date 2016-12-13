@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/meat_and_potatoes'
+require './lib/encryption'
 
 
 class EncryptionTest < Minitest::Test
@@ -24,10 +24,6 @@ class EncryptionTest < Minitest::Test
     assert_equal Fixnum, hash_1["B"].class
     assert_equal Fixnum, hash_1["C"].class
     assert_equal Fixnum, hash_1["D"].class
-    assert_equal 2, hash_1["A"].to_s.length
-    assert_equal 2, hash_1["B"].to_s.length
-    assert_equal 2, hash_1["C"].to_s.length
-    assert_equal 2, hash_1["D"].to_s.length
   end
 
   def test_hash_2_values_are_integers_and_have_one_integer

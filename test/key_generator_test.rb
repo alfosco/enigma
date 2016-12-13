@@ -29,41 +29,15 @@ class KeyGeneratorTest < Minitest::Test
   def test_key_rotation_values_are_2_fixnumbs
     kg = KeyGenerator.new
     kg.key
-    kg.set_hash_values
-    kg.to_integer
-    assert_equal Fixnum, kg.key_rotation["A"].class
-    assert_equal 2, kg.key_rotation["A"].to_s.length
+    assert_equal 2, kg.set_hash_values["A"].length
+    assert_equal Fixnum, kg.to_integer["A"].class
+    assert_equal 2, kg.set_hash_values["B"].length
+    assert_equal Fixnum, kg.to_integer["B"].class
+    assert_equal 2, kg.set_hash_values["C"].length
+    assert_equal Fixnum, kg.to_integer["C"].class
+    assert_equal 2, kg.set_hash_values["D"].length
+    assert_equal Fixnum, kg.to_integer["D"].class
   end
-
-  # def test_last_value_of_rotation_A_same_as_first_value_of_rotation_B
-  #   kg = KeyGenerator.new
-  #   kg.key
-  #   kg.set_hash_values
-  #   key_rot = kg.to_integer
-  #   key_rot_a = key_rot["A"].to_s
-  #   key_rot_b = key_rot["B"].to_s
-  #   assert key_rot_a[1] == key_rot_b[0]
-  # end
-  #
-  # def test_last_value_of_rotation_B_same_as_first_value_of_rotation_C
-  #   kg = KeyGenerator.new
-  #   kg.key
-  #   kg.set_hash_values
-  #   key_rot = kg.to_integer
-  #   key_rot_b = key_rot["B"].to_s
-  #   key_rot_c = key_rot["C"].to_s
-  #   assert key_rot_b[1] == key_rot_c[0]
-  # end
-  #
-  # def test_last_value_of_rotation_C_same_as_first_value_of_rotation_D
-  #   kg = KeyGenerator.new
-  #   kg.key
-  #   kg.set_hash_values
-  #   key_rot = kg.to_integer
-  #   key_rot_c = key_rot["C"].to_s
-  #   key_rot_d = key_rot["D"].to_s
-  #   assert key_rot_c[1] == key_rot_d[0]
-  # end
 
 
 end
