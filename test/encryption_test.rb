@@ -50,6 +50,20 @@ class EncryptionTest < Minitest::Test
     assert offset_rots["D"] == (rot_sums["D"]) - (key_rots["D"])
   end
 
+  def test_extract_hash_sums_contains_array_of_sums
+    encrypt = Encryption.new
+    assert_equal Array, encrypt.extract_hash_sums.class
+  end
 
+  # def test_it_grabs_index_from_library_that_matches_letters
+  #   encrypt = Encryption.new
+  #   assert_equal 
+  # end
+
+  def test_it_returns_encrypted_string
+    encrypt = Encryption.new
+    assert_equal 4, encrypt.find_start_index("lost").length
+    assert_equal String, encrypt.find_start_index("lost").class
+  end
 
 end
