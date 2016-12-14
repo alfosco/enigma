@@ -37,7 +37,7 @@ class Encrypt
     # start index for char_map
     # char_map
     # Rotate A Value
-    start_index = char_map.index(character.to_s) #character has to be a string
+    start_index = char_map.index(character) #character has to be a string
     value =  start_index + rotation_values["A"]
     char_map.rotate(value)[0]
   end
