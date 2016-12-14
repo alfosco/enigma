@@ -1,25 +1,25 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/encryption'
+require './lib/rotation_calculator'
 
 
-class EncryptionTest < Minitest::Test
+class RotationCalculatorTest < Minitest::Test
 
   def test_it_exists
-    encrypt = Encryption.new
-    assert_equal Encryption, encrypt.class
-    assert_instance_of Encryption, encrypt
+    calculate = RotationCalculator.new
+    assert_equal RotationCalculator, calculate.class
+    assert_instance_of RotationCalculator, calculate
   end
 
   def test_hash_1_and_2_are_hashes
-    encrypt = Encryption.new
-    assert_equal Hash, encrypt.hash_1.class
-    assert_equal Hash, encrypt.hash_2.class
+    calculate = RotationCalculator.new
+    assert_equal Hash, calculate.hash_1.class
+    assert_equal Hash, calculate.hash_2.class
   end
 
   def test_hash_1_values_are_integers_and_have_two_integers
-    encrypt = Encryption.new
-    hash_1  = encrypt.hash_1
+    calculate = RotationCalculator.new
+    hash_1  = calculate.hash_1
     assert_equal Fixnum, hash_1["A"].class
     assert_equal Fixnum, hash_1["B"].class
     assert_equal Fixnum, hash_1["C"].class
@@ -27,8 +27,8 @@ class EncryptionTest < Minitest::Test
   end
 
   def test_hash_2_values_are_integers_and_have_one_integer
-    encrypt = Encryption.new
-    hash_2  = encrypt.hash_2
+    calculate = RotationCalculator.new
+    hash_2  = calculate.hash_2
     assert_equal Fixnum, hash_2["A"].class
     assert_equal Fixnum, hash_2["B"].class
     assert_equal Fixnum, hash_2["C"].class
@@ -40,30 +40,14 @@ class EncryptionTest < Minitest::Test
   end
 
   def test_encryption_rotations_contains_sum_of_key_and_offset_rotations
-    encrypt     = Encryption.new
-    rot_sums    = encrypt.hash_merge
-    key_rots    = encrypt.hash_1
-    offset_rots = encrypt.hash_2
+    calculate     = RotationCalculator.new
+    rot_sums    = calculate.hash_merge
+    key_rots    = calculate.hash_1
+    offset_rots = calculate.hash_2
     assert offset_rots["A"] == (rot_sums["A"]) - (key_rots["A"])
     assert offset_rots["B"] == (rot_sums["B"]) - (key_rots["B"])
     assert offset_rots["C"] == (rot_sums["C"]) - (key_rots["C"])
     assert offset_rots["D"] == (rot_sums["D"]) - (key_rots["D"])
-  end
-
-  def test_extract_hash_sums_contains_array_of_sums
-    encrypt = Encryption.new
-    assert_equal Array, encrypt.extract_hash_sums.class
-  end
-
-  # def test_it_grabs_index_from_library_that_matches_letters
-  #   encrypt = Encryption.new
-  #   assert_equal 
-  # end
-
-  def test_it_returns_encrypted_string
-    encrypt = Encryption.new
-    assert_equal 4, encrypt.find_start_index("lost").length
-    assert_equal String, encrypt.find_start_index("lost").class
   end
 
 end
