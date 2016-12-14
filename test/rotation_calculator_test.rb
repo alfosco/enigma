@@ -1,3 +1,6 @@
+require 'simplecov'
+SimpleCov.start
+
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/rotation_calculator'
@@ -41,7 +44,7 @@ class RotationCalculatorTest < Minitest::Test
 
   def test_encryption_rotations_contains_sum_of_key_and_offset_rotations
     calculate     = RotationCalculator.new
-    rot_sums    = calculate.hash_merge
+    rot_sums    = calculate.rotation_values
     key_rots    = calculate.hash_1
     offset_rots = calculate.hash_2
     assert offset_rots["A"] == (rot_sums["A"]) - (key_rots["A"])
