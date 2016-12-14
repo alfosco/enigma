@@ -16,4 +16,13 @@ class Enigma
     writer.close
   end
 
+  def return_message
+    puts "Created '#{ARGV[1]}' with the key and date"
+  end
+
 end
+
+e = Enigma.new
+e.read_file
+e.write_file
+e.return_message
