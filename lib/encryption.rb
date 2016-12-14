@@ -26,4 +26,5 @@ attr_accessor :encryption_rotations
     end
   end
 
+
 end
