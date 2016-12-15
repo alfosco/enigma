@@ -1,62 +1,33 @@
-require_relative 'encrypt'
-require_relative 'rotation_calculator'
-
-# need encrypt in order to access the correct rotation values
+require './lib/decrypt_machine'
+require 'Date'
 
 class Decrypt
-  attr_reader :char_map, :rotation_values
-  # attr_accessor
 
   def initialize
-    @char_map = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-      "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", ".", ","]
-    @rotation_values = RotationCalculator.new.rotation_values
+    @date = Date.today.strftime("%d%m%y").to_i
   end
 
-
-  def decryption_rotator(encrypted_message)
-    count = 0
-    message_array = encrypted_message.chars
-    decrypted_message =  message_array.map do |character|
-        if count == 0
-          count += 1
-          reverse_a(character)
-        elsif count == 1
-          count+= 1
-          reverse_b(character)
-        elsif count == 2
-          count += 1
-          reverse_c(character)
-        else
-          count = 0
-          reverse_d(character)
-        end
-      end
-    decrypted_message.join
+  def read_file
+    handle = File.open(ARGV[0], "r")
+    @plain_text = handle.read
+    handle.close
   end
 
-  def reverse_a(character)
-    start_index = char_map.index(character)
-    value       = rotation_values["A"] - start_index
-    char_map.rotate(-value)[0]
+  def write_file
+    decryptor = DecryptMachine.new
+    decrypted_text = decryptor.decryption_rotator(@plain_text)#put here- method that decrypts
+    writer = File.open(ARGV[1], "w")
+    writer.write(decrypted_text)
+    writer.close
   end
 
-  def reverse_b(character)
-    start_index = char_map.index(character)
-    value       = rotation_values["B"] - start_index
-    char_map.rotate(-value)[0]
-  end
-
-  def reverse_c(character)
-    start_index = char_map.index(character)
-    value       =  rotation_values["C"] - start_index
-    char_map.rotate(-value)[0]
-  end
-
-  def reverse_d(character)
-    start_index = char_map.index(character)
-    value       =  rotation_values["D"] - start_index
-    char_map.rotate(-value)[0]
+  def return_message
+    puts "Created '#{ARGV[1]}' with the key and date #{@date}"
   end
 
 end
+
+d = Decrypt.new
+d.read_file
+d.write_file
+d.return_message
