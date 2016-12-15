@@ -1,5 +1,6 @@
 require './lib/decrypt_machine'
 require 'Date'
+require 'pry'
 
 class Decrypt
 
@@ -14,15 +15,16 @@ class Decrypt
   end
 
   def write_file
-    decryptor = DecryptMachine.new
-    decrypted_text = decryptor.decryption_rotator(@plain_text)#put here- method that decrypts
+    decryptor = DecryptMachine.new(@plain_text, ARGV[2])
+    # binding.pry
+    decrypted_text = decryptor.decryption_rotator#put here- method that decrypts
     writer = File.open(ARGV[1], "w")
     writer.write(decrypted_text)
     writer.close
   end
 
   def return_message
-    puts "Created '#{ARGV[1]}' with the key and date #{@date}"
+    puts "Created '#{ARGV[1]}' with the key #{ARGV[2]} and date #{@date}"
   end
 
 end

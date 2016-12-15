@@ -1,40 +1,40 @@
-require 'simplecov'
-SimpleCov.start
+#require 'simplecov'
+#SimpleCov.start
 
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/EncryptMachine'
+require './lib/encrypt_machine'
 
 class EncryptMachineTest < Minitest::Test
 
   def test_it_exists
-    encrypt = EncryptMachine.new
+    e = EncryptMachine.new
 
-    assert_equal EncryptMachine, encrypt.class
-    assert_instance_of EncryptMachine, encrypt
+    assert_equal EncryptMachine, e.class
+    assert_instance_of EncryptMachine, e
   end
 
   def test_char_map_is_array
-    encrypt = EncryptMachine.new
-    assert_equal Array, encrypt.char_map.class
+    e = EncryptMachine.new
+    assert_equal Array, e.char_map.class
   end
 
   def test_rotate_a_rotates_correctly
-    encrypt = EncryptMachine.new
+    e = EncryptMachine.new
 
-    char_map = encrypt.char_map
-    encrypt.rotation_values["A"] = 49
-    assert_equal "q", encrypt.rotate_a("g")
+    char_map = e.char_map
+    e.rotation_values["A"] = 49
+    assert_equal "q", e.rotate_a("g")
   end
 
   def test_encryption_rotator_can_encrypt_message
-    encrypt = EncryptMachine.new
+    e = EncryptMachine.new
     incoming_text = "this is a test"
-    encrypt.rotation_values["A"] = 10
-    encrypt.rotation_values["B"] = 34
-    encrypt.rotation_values["C"] = 86
-    encrypt.rotation_values["D"] = 23
+    e.rotation_values["A"] = 10
+    e.rotation_values["B"] = 34
+    e.rotation_values["C"] = 86
+    e.rotation_values["D"] = 23
 
-    assert_equal "3cqchd0uk5112o", encrypt.encryption_rotator(incoming_text)
+    assert_equal "3cqchd0uk5112o", e.encrypt(incoming_text)
   end
 end
