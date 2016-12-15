@@ -1,17 +1,20 @@
 require_relative 'rotation_calculator'
+require 'pry'
 
 class EncryptMachine
-  attr_reader :char_map, :rotation_values
+  attr_reader :char_map, :rotation_values, :rotation_calculate, :key
   # attr_accessor
 
   def initialize
     @char_map = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
       "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", ".", ","]
-    @rotation_values = RotationCalculator.new.rotation_values
+    @rotation_calculate = RotationCalculator.new
+    @rotation_values = rotation_calculate.rotation_values
+    @key = rotation_calculate.key.key
   end
 
 
-  def encryption_rotator(plain_message)
+  def encrypt(plain_message)
     count = 0
     message_array = plain_message.chars
     encrypted_message =  message_array.map do |character|
